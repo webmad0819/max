@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form action="">
+      <input
+        type="radio"
+        value="social"
+        name="chosen-type"
+        class="radio social"
+      />social
+      <input
+        type="radio"
+        value="busywork"
+        name="chosen-type"
+        class="radio busywork"
+      />busywork
+
+      <select name="" id="available">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+      </select>
+    </form>
+
+    <script>
+      let availables = [
+        { type: "social", diff: [1, 2, 3, 4] },
+        { type: "busywork", diff: [5, 6, 7] }
+      ];
+
+      function applyChangeToDropdown(type) {
+        let availablesOfChosen = availables.filter(x => x.type === type)[0]
+          .diff;
+
+        document
+          .querySelectorAll("#available option")
+          .forEach(x => x.removeAttribute("disabled", "disabled"));
+
+        document.querySelectorAll("#available option").forEach(x => {
+          if (availablesOfChosen.indexOf(+x.value) === -1) {
+            x.setAttribute("disabled", "disabled");
+          }
+        });
+      }
+
+      document.querySelector(".radio.social").onclick = function() {
+        applyChangeToDropdown("social");
+      };
+      document.querySelector(".radio.busywork").onclick = function() {
+        applyChangeToDropdown("busywork");
+      };
+    </script>
+  </body>
+</html>
